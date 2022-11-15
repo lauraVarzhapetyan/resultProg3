@@ -1,25 +1,17 @@
-class Mat extends LivingCreature{
+var LivingCreature = require('./LivingCreature')
+module.exports = class Mat extends LivingCreature{
     constructor(x, y, index) {
         super(x, y, index);
         this.energy = 30;
         this.directions = [];
         for (var k = 0; k < matrix.length; k++) {
             if ((x + k) <= matrix[k].length && (y + k) <= matrix.length) {
-                var zangvac1 = [];
-                var zangvac2 = [];
-                var newx1 = x - k;
-                var newx2 = x + k;
-                var newy1 = y - k;
-                var newy2 = y + k;
-                zangvac1.push(newx1);
-                zangvac2.push(newx2);
-                zangvac1.push(newy1);
-                zangvac2.push(newy2);
+                var zangvac1 = [this.x - k, this.y - k];
+                var zangvac2 = [this.x + k, this.y + k];
                 this.directions.push(zangvac1);
                 this.directions.push(zangvac2);
             }
         }
-        console.log(this.directions);
     }
     getNewCoordinates() {
         this.directions;

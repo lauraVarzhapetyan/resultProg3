@@ -1,4 +1,5 @@
-class Taguhi extends LivingCreature {
+var LivingCreature = require('./LivingCreature')
+module.exports = class Taguhi extends LivingCreature {
     constructor(x, y, index) {
         super(x, y, index);
         this.energy = 30;
@@ -58,7 +59,7 @@ class Taguhi extends LivingCreature {
                 var x = cord[0];
                 var y = cord[1];
 
-                matrix[y][x] = this.index;
+                matrix[y][x] = 4;
                 matrix[this.y][this.x] = 0;
 
                 this.x = x;

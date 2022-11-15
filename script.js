@@ -1,9 +1,17 @@
+var Grass = require('./Grass');
+var GrassEater = require('./GrassEater');
+var Gishatich = require('./Gishatich');
+var Taguhi = require('./Taguhi');
+var Mat = require('./Mat');
+var Equalizer = require('./Equalizer');
+
 var side = 5;
 var grassArr = []; //խոտերի զանգված
 var eatArr = []; //խոտակերների զանգված
 var gishatichArr=[];
 var taguhiArr=[];
 var matArr=[];
+var eArr=[];
 var matrix=[];
 var row=80;
 var column=80;
@@ -12,13 +20,13 @@ for( var n=0; n<row; n++)
     matrix[n]=[];
     for( var e=0; e<column; e++)
     {
-        matrix[n][e]=Math.round(Math.random()*5);
+        matrix[n][e]=Math.round(Math.random()*6);
     }
 }
 
 function setup() {
     noStroke();
-    frameRate(5);
+    frameRate(6);
     createCanvas(matrix[0].length * side, matrix.length * side); //կտավի չափերը դնել մատրիցայի չափերին համապատասխան
     background('#acacac');
   
@@ -41,6 +49,9 @@ function setup() {
             } else if(matrix[y][x]==5){
                 var mat=new Mat(x,y);
                 matArr.push(mat);
+            } else if(matrix[y][x]==6){
+                var equalizer=new Equalizer(x,y);
+                eArr.push(equalizer);
             }
         }
     }
@@ -72,6 +83,9 @@ function draw() {
             } else if(matrix[i][j]==5){
                 fill("brown");
                 rect(j*side, i*side, side, side);
+            } else if(matrix[i][j]==6){
+                fill("black");
+                rect(j*side, i*side, side, side);
             }
         }
     }
@@ -81,12 +95,10 @@ function draw() {
     for (var i in grassArr) {
         grassArr[i].mul();
     }
-
     //յուրաքանչյուր խոտակեր փորձում է ուտել խոտ
     for (var i in eatArr) {
         eatArr[i].eat();
     }
-
     for (var i in gishatichArr) {
         gishatichArr[i].eat();
     }
@@ -95,5 +107,8 @@ function draw() {
     }
     for (var i in matArr) {
         matArr[i].eat();
+    }
+    for (var i in eArr) {
+        eArr[i].eat();
     }
 }
